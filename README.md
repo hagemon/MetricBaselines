@@ -23,7 +23,7 @@ Issues are welcomed!
 
 ### dataset.py
 
-Implementation of Dataset class and interfaces of getting dataset and data loader.
+Implementations of Dataset class and interfaces of getting dataset and data loader.
 
 ### model.py
 
@@ -39,7 +39,7 @@ We have two sampler here
 
 ### test.py
 
-Implementation of experiment metric including:
+Implementations of experiment metric including:
 
 - R@1 R@2 R@4 R@8
 - NMI
@@ -57,11 +57,11 @@ Some pre-process to data.
 
 ### basic_model
 
-Implementation of Inception v1, written by [TheCodeZ](https://github.com/TheCodez/vision/releases/tag/1.0)
+Implementations of Inception v1, written by [TheCodeZ](https://github.com/TheCodez/vision/releases/tag/1.0)
 
 ### losses
 
-Implementation of losses mentioned above.
+Implementations of losses mentioned above.
 
 Some of them are collected from [bnulihaixia](https://github.com/bnulihaixia/Deep_metric) and [adambielski](https://github.com/adambielski/siamese-triplet)
 
