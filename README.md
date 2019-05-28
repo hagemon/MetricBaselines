@@ -1,6 +1,6 @@
 # Metric Baselines
 
-Implementation of some popular metric learning methods via PyTorch, including:
+Implementations of some popular metric learning methods via PyTorch, including:
 
 - Semi-hard Triplet Loss [1]
 - N-pair Loss [2]
@@ -57,13 +57,13 @@ Some pre-process to data.
 
 ### basic_model
 
-Implementations of Inception v1, written by [TheCodeZ](https://github.com/TheCodez/vision/releases/tag/1.0)
+Implementations of Inception v1, written by [TheCodeZ](https://github.com/TheCodez/vision/releases/tag/1.0).
 
 ### losses
 
 Implementations of losses mentioned above.
 
-Some of them are collected from [bnulihaixia](https://github.com/bnulihaixia/Deep_metric) and [adambielski](https://github.com/adambielski/siamese-triplet)
+Some of them are collected from [bnulihaixia](https://github.com/bnulihaixia/Deep_metric) and [adambielski](https://github.com/adambielski/siamese-triplet).
 
 ## Usage
 ### Datasets
