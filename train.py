@@ -11,8 +11,8 @@ from sampler import ClassMiningSampler
 from test import test
 from model import get_model
 from transforms import get_transform
-import losses
 
+from losses import class_centers, get_loss
 
 class Trainer:
     def __init__(self, args):
@@ -102,7 +102,7 @@ class Trainer:
 
             if self.cm and running_epoch % self.update_epoch == 0:
                 embeddings, labels, spend = self.feed_embeddings('mean')
-                centers = losses.class_centers(embeddings, labels)
+                centers = class_centers(embeddings, labels)
                 self.cm_sampler.update_centers(centers, running_epoch)
                 start += spend
 
@@ -113,7 +113,7 @@ class Trainer:
                 self.optimizer.zero_grad()
                 with torch.set_grad_enabled(True):
                     outputs = self.model(inputs)
-                    loss_fn = losses.get_loss(self.method)
+                    loss_fn = get_loss(self.method)
                     loss, count = loss_fn(outputs, labels)
 
                     loss.backward()
