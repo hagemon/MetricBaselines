@@ -15,9 +15,24 @@ except using Euclidean distance in Lifted Structed Loss.
 
 We may add more methods in the future.
 
-If you find this project useful, feel free to cite methods above in your paper and star the referenced repos (mentioned in losses section).
+If you find this project useful, please cite methods above in your paper and star the referenced repos:
+
+- [TheCodeZ](https://github.com/TheCodez/vision/releases/tag/1.0).
+- [bnulihaixia](https://github.com/bnulihaixia/Deep_metric) 
+- [adambielski](https://github.com/adambielski/siamese-triplet).
 
 Issues are welcomed!
+
+## Environment
+
+| Package     | Version     |
+|:-----------:|:-----------:|
+| python      | 3.5.2       |
+| torch       | 1.0.1.post2 |
+| torchvision | 0.2.1       |
+| numpy       | 1.16.2      |
+| Pillow      | 5.1.0       |
+
 
 ## Code Architecture
 
