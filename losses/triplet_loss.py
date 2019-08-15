@@ -18,19 +18,18 @@ class TripletLoss(nn.Module):
         dist = distance(embeddings)
         unique_labels = labels.unique()
         losses = 0.0
-        count = 0
+        count = 0.0
 
         for label in unique_labels:
             pos_mask = labels == label
             neg_mask = ~pos_mask
 
-            pos = dist[pos_mask]
-            neg = dist[neg_mask]
+            ap = dist[pos_mask][:, pos_mask]
+            an = dist[pos_mask][:, neg_mask]
 
-            loss = pos.unsqueeze(1)-neg.unsqueeze(0)+self.margin
+            loss = ap.unsqueeze(2)-an.unsqueeze(1)+self.margin
             mask = (loss > 0) & (loss < self.margin)
             loss = loss.masked_select(mask)
             losses += loss.sum()
             count += mask.sum()
-
-        return losses, count
+        return losses, float(count)

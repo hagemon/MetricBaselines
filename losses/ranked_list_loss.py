@@ -2,6 +2,12 @@ import torch
 import torch.nn as nn
 
 
+def distance(vectors):
+    distance_matrix = -2 * vectors.mm(torch.t(vectors)) + vectors.pow(2).sum(dim=1).view(1, -1) + vectors.pow(2).sum(
+        dim=1).view(-1, 1)
+    return distance_matrix
+
+
 class RankedListLoss(nn.Module):
 
     def __init__(self, margin, alpha):
@@ -13,7 +19,7 @@ class RankedListLoss(nn.Module):
     def forward(self, embeddings, labels):
         loss = 0.0
         n_classes = torch.unique(labels)
-        dist = (embeddings.unsqueeze(1)-embeddings.unsqueeze(0)).pow(2).sum(2)
+        dist = distance(embeddings)
         for c in n_classes:
             pos_mask = labels == c
             neg_mask = ~pos_mask

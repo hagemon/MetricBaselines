@@ -27,7 +27,7 @@ class Trainer:
         self.val_batch_size = self.batch_size // 2
         self.iteration = args.iteration
         self.evaluation = args.evaluation
-        self.show_iter = 1000
+        self.show_iter = 1
         self.update_epoch = 10
         self.balanced = args.balanced
         self.instances = args.instances
@@ -182,7 +182,6 @@ class Trainer:
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Metric Baselines')
-    # 1e-5 for CUB, 1e-4 for the rest
     parser.add_argument('--lr', default=1e-5, type=float)
     parser.add_argument('--iteration', default=20000, type=int)
     parser.add_argument('--dim', default=512, type=int)

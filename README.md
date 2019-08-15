@@ -80,6 +80,10 @@ Just train.
 
 Some pre-process to data.
 
+### train.sh
+
+A demo of training through all methods with all datasets.
+
 ### basic_model
 
 Implementations of Inception v1, written by [TheCodeZ](https://github.com/TheCodez/vision/releases/tag/1.0).
