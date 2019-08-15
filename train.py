@@ -27,7 +27,7 @@ class Trainer:
         self.val_batch_size = self.batch_size // 2
         self.iteration = args.iteration
         self.evaluation = args.evaluation
-        self.show_iter = 1
+        self.show_iter = 1000
         self.update_epoch = 10
         self.balanced = args.balanced
         self.instances = args.instances

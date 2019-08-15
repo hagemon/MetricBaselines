@@ -72,8 +72,9 @@ class ClassMiningSampler(Sampler):
             if len(self.centers) == 0:
                 classes = np.random.choice(self.labels_set, self.n_classes, replace=False)
             else:
+                # label set start from 1 while dist_rank start from 0
                 c = np.random.choice(self.labels_set, 1)[0]
-                classes = self.dist_rank[c][:self.n_classes]
+                classes = self.dist_rank[c-1][:self.n_classes]+1
             indices = []
             if self.balanced:
                 for c in classes:
