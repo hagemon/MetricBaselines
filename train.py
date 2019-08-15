@@ -12,7 +12,8 @@ from test import test
 from model import get_model
 from transforms import get_transform
 
-from losses import class_centers, get_loss
+from losses.get_loss import class_centers, get_loss
+
 
 class Trainer:
     def __init__(self, args):
@@ -26,7 +27,7 @@ class Trainer:
         self.val_batch_size = self.batch_size // 2
         self.iteration = args.iteration
         self.evaluation = args.evaluation
-        self.show_iter = 500
+        self.show_iter = 1000
         self.update_epoch = 10
         self.balanced = args.balanced
         self.instances = args.instances
@@ -181,10 +182,11 @@ class Trainer:
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Metric Baselines')
-    parser.add_argument('--lr', default=0.00001, type=float)
+    # 1e-5 for CUB, 1e-4 for the rest
+    parser.add_argument('--lr', default=1e-5, type=float)
     parser.add_argument('--iteration', default=20000, type=int)
     parser.add_argument('--dim', default=512, type=int)
-    parser.add_argument('--batch-size', default=128, type=int)
+    parser.add_argument('--batch-size', default=120, type=int)
     parser.add_argument('--dataset', default='CUB', type=str)
     parser.add_argument('-e', '--evaluation', dest='evaluation', action='store_true')
     parser.add_argument('--method', default='Triplet', type=str)

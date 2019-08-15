@@ -31,7 +31,7 @@ class Dataset(data_utils.Dataset):
 
 
 def get_datasets(dataset, data_dir, transforms):
-    image_folder = {'CUB': 'images'}
+    image_folder = {'CUB': 'images', 'CARS196': '', 'SOP': ''}
     image_datasets = {
         'train': Dataset(file_name=os.path.join(data_dir, 'train.txt'),
                          root_dir=os.path.join(data_dir, image_folder[dataset]),

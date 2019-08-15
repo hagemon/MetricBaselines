@@ -40,6 +40,16 @@ Issues are welcomed!
 
 Implementations of Dataset class and interfaces of getting dataset and data loader.
 
+**Remember change *image_folder* in *get_datasets* function to fit your environment.**
+
+The paths to image are composed of 
+
+`
+self.root_dir/datasets/self.dataset/image_folder/path_in_file.png
+`
+
+`self` here indicates `Trainer` instace in `train.py`.
+
 ### model.py
 
 Build our network with Inception V1 [6] and randomly initialized fully connected layer, and provide a interface to get our model.
@@ -90,13 +100,35 @@ python train.py --dataset $DATASET
 ```
 
 We place the image path and label id for each sample in one line in **train.txt** and **test.txt**.
-Here is a demo of train.txt
+Here are demos of train.txt for CUB, CARS196, SOP, respectively
 
 ```
-path/to/images/hello_kitty.jpg 0
-path/to/images/Garfield.jpg 0
-path/to/images/Snoopy.jpg 1
-path/to/images/Goofy.jpg 1
+# For CUB
+...
+200.Common_Yellowthroat/Common_Yellowthroat_0070_190678.jpg 199
+200.Common_Yellowthroat/Common_Yellowthroat_0040_190427.jpg 199
+200.Common_Yellowthroat/Common_Yellowthroat_0098_190430.jpg 199
+200.Common_Yellowthroat/Common_Yellowthroat_0094_190690.jpg 199
+...
+```
+
+```
+# For CARS196
+...
+car_ims/000002.jpg 1
+car_ims/000003.jpg 1
+car_ims/000004.jpg 1
+car_ims/000005.jpg 1
+...
+```
+
+```
+# For Stanford Online Products
+...
+lamp_final/121721458118_5.JPG 7
+lamp_final/121721458118_6.JPG 7
+lamp_final/121721495122_0.JPG 7
+lamp_final/121721495122_1.JPG 7
 ...
 ```
 
@@ -139,6 +171,8 @@ just add `-e` for each training command, our script
 will automatically find trained model if exists.
 
 ## Results
+
+These results are evaluated on CUB dataset.
 
 | Method          | R@1    | R@2    | R@4    | R@8    | NMI    | F1     |
 | --------------- | ------ | ------ | ------ | ------ | ------ | ------ |
