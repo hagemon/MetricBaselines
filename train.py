@@ -98,6 +98,11 @@ class Trainer:
         running_loss = 0.0
         running_count = 0
         running_epoch = 0
+
+        pred_time = 0.0
+        opt_time = 0.0
+        load_time = 0.0
+
         print('Start training')
         while running_iter < self.iteration:
 
@@ -108,17 +113,27 @@ class Trainer:
                 start += spend
 
             # Train an epoch
+            t0 = time.time()
             for sample in self.data_loaders['train']:
+                if running_iter > self.iteration:
+                    break
                 inputs = sample['image'].to(self.device)
                 labels = sample['label'].to(self.device)
                 self.optimizer.zero_grad()
                 with torch.set_grad_enabled(True):
+                    t1 = time.time()
                     outputs = self.model(inputs)
+                    t2 = time.time()
                     loss_fn = get_loss(self.method)
                     loss, count = loss_fn(outputs, labels)
 
                     loss.backward()
+                    t3 = time.time()
                     self.optimizer.step()
+
+                load_time += t1 - t0
+                pred_time += t2 - t1
+                opt_time += t3 - t2
 
                 running_loss += loss.item() / count
                 running_count += count
@@ -138,6 +153,7 @@ class Trainer:
             running_epoch += 1
 
         time_elapsed = time.time() - since
+        print('pred:{:.0f} opt:{:.0f} load:{:.0f}'.format(pred_time, opt_time, load_time))
         print('Training complete in {:.0f}m {:.0f}s'.format(time_elapsed // 60, time_elapsed % 60))
         return self.model
 

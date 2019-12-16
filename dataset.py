@@ -48,14 +48,14 @@ def get_data_loaders(datasets, batch_size, val_batch_size, n_instance, balanced=
     if cm is not None:
         train_loader = DataLoader(
             datasets['train'],
-            num_workers=8,
+            num_workers=16,
             batch_sampler=cm,
             pin_memory=True,
         )
     elif balanced:
         train_loader = DataLoader(
             datasets['train'],
-            num_workers=8,
+            num_workers=16,
             batch_sampler=cm if cm else balanced_sampler,
             pin_memory=True,
         )
@@ -64,11 +64,11 @@ def get_data_loaders(datasets, batch_size, val_batch_size, n_instance, balanced=
             datasets['train'],
             shuffle=True,
             batch_size=batch_size,
-            num_workers=8,
+            num_workers=16,
         )
     dataset_loaders = {
         'train': train_loader,
-        'mean': DataLoader(datasets['train'], batch_size=batch_size, num_workers=8),
-        'test': DataLoader(datasets['test'], batch_size=val_batch_size, num_workers=8),
+        'mean': DataLoader(datasets['train'], batch_size=batch_size, num_workers=16),
+        'test': DataLoader(datasets['test'], batch_size=val_batch_size, num_workers=16),
     }
     return dataset_loaders

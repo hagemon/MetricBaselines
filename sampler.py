@@ -1,5 +1,6 @@
 from torch.utils.data.sampler import Sampler
 import numpy as np
+import warnings
 
 
 class BalancedSampler(Sampler):
@@ -14,6 +15,8 @@ class BalancedSampler(Sampler):
         }
         for label in self.label_indices:
             np.random.shuffle(self.label_indices[label])
+            if len(self.label_indices[label]) > n_instance:
+                warnings.warn('Class {} has insufficient samples for n_instance={}'.format(label, n_instance))
         self.used_ind_pos = {label: 0 for label in self.labels_set}
         self.count = 0
         self.n_classes = n_classes
@@ -32,7 +35,7 @@ class BalancedSampler(Sampler):
                 pos = self.used_ind_pos[c]
                 indices.extend(c_indices[pos:pos+self.n_samples])
                 self.used_ind_pos[c] += self.n_samples
-                if self.used_ind_pos[c] > len(self.label_indices[c]):
+                if self.used_ind_pos[c] + self.n_samples > len(self.label_indices[c]):
                     np.random.shuffle(self.label_indices[c])
                     self.used_ind_pos[c] = 0
             yield indices
@@ -54,6 +57,8 @@ class ClassMiningSampler(Sampler):
         }
         for label in self.label_indices:
             np.random.shuffle(self.label_indices[label])
+            if balanced and len(self.label_indices[label]) > n_instance:
+                warnings.warn('Class {} has insufficient samples for n_instance={}'.format(label, n_instance))
         self.used_ind_pos = {label: 0 for label in self.labels_set}
         self.count = 0
         self.n_classes = n_classes
@@ -82,7 +87,7 @@ class ClassMiningSampler(Sampler):
                     pos = self.used_ind_pos[c]
                     indices.extend(c_indices[pos:pos + self.n_samples])
                     self.used_ind_pos[c] += self.n_samples
-                    if self.used_ind_pos[c] > len(self.label_indices[c]):
+                    if self.used_ind_pos[c] + self.n_samples > len(self.label_indices[c]):
                         np.random.shuffle(self.label_indices[c])
                         self.used_ind_pos[c] = 0
                 yield indices
