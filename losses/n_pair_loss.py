@@ -42,7 +42,7 @@ class NPairLoss(nn.Module):
         labels = labels.cpu().data.numpy()
         n_pairs = []
 
-        for label in labels:
+        for label in list(labels):
             label_mask = (labels == label)
             label_indices = np.where(label_mask)[0]
             if len(label_indices) < 2:
